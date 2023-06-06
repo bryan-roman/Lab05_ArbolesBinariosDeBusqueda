@@ -20,16 +20,17 @@ public class BinarySearchTrees {
             while(temporalNodo != null){
                 newNodo.father = temporalNodo; //El padre del nuevo nodo es tmeporal
 
-
                 if(newNodo.key >= temporalNodo.key){ //si la llave del nuevo nodo es mayor o igual al temporal llave
                     temporalNodo = temporalNodo.right;      //Lado derecho del árbol
                 } else {
                     temporalNodo = temporalNodo.left;       //Lado izquiero del árbol
                 }
-            } if (newNodo.key < newNodo.father.key){
-                newNodo.father.left = newNodo;
+
+
+            } if (newNodo.key < newNodo.father.key){ //Si la llave del nuevo nodo es menor a la llave del padre
+                newNodo.father.left = newNodo; //coloque el nuevo elemento a la izquierda
             } else {
-                newNodo.father.right = newNodo;
+                newNodo.father.right = newNodo; //Si la llave del nuevo nodo es mayor a la llave del padre
             }
         }
     }
@@ -48,7 +49,6 @@ public class BinarySearchTrees {
             left = null;
             father = null;
             value = null;
-
         }
     }
 }
