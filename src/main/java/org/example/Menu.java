@@ -20,7 +20,6 @@ public class Menu {
                     + "4- Salir");
 
             int optionStartMenu = Integer.parseInt(scanner.nextLine());
-            do {
                 switch (optionStartMenu) {
                     case 1:
                         addMenu();
@@ -37,7 +36,7 @@ public class Menu {
                         break;
                 }
 
-            } while (optionStartMenu != 4);
+           
         }        
 
 }
