@@ -1,11 +1,18 @@
 package org.example;
 
 public class BinarySearchTrees {
-
     Nodo root;
-
     public BinarySearchTrees() {
         root = null;
+    }
+
+    public void inorderTreewalk(Nodo busqueda){
+        if (busqueda != null){
+            inorderTreewalk(busqueda.left);
+            System.out.println(busqueda.llave); //Regresal al medio o nodo actual
+            inorderTreewalk(busqueda.right);
+
+        }
     }
 
     public void insertar(int key, Object value){
@@ -17,17 +24,17 @@ public class BinarySearchTrees {
         }
         else { //Se debe recorrer el arbol para encontrar un punto donde agregar el nodo
             Nodo temporalNodo = root;
-            while(temporalNodo != null){
+            while(temporalNodo != null) {
                 newNodo.father = temporalNodo; //El padre del nuevo nodo es tmeporal
 
-                if(newNodo.key >= temporalNodo.key){ //si la llave del nuevo nodo es mayor o igual al temporal llave
+
+                if (newNodo.llave >= temporalNodo.llave) { //si la llave del nuevo nodo es mayor o igual al temporal llave
                     temporalNodo = temporalNodo.right;      //Lado derecho del árbol
                 } else {
                     temporalNodo = temporalNodo.left;       //Lado izquiero del árbol
                 }
-
-
-            } if (newNodo.key < newNodo.father.key){ //Si la llave del nuevo nodo es menor a la llave del padre
+            }
+            if (newNodo.llave < newNodo.father.llave){ //Si la llave del nuevo nodo es menor a la llave del padre
                 newNodo.father.left = newNodo; //coloque el nuevo elemento a la izquierda
             } else {
                 newNodo.father.right = newNodo; //Si la llave del nuevo nodo es mayor a la llave del padre
@@ -39,12 +46,12 @@ public class BinarySearchTrees {
         public Nodo father; //padre
         public Nodo right;
         public Nodo left;
-        public int key;
+        public int llave;
         public Object value;
 
 
         public Nodo(int key) {
-            key = key;
+            llave = key;
             right = null;
             left = null;
             father = null;

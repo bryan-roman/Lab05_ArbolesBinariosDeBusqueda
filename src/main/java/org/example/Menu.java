@@ -28,13 +28,13 @@ public class Menu {
                     //deleteMenu
                     break;
                 case 3:
-                    //searchMenu
+                    searchMenu();
+                    startMenu();
                     break;
                 case 4:
                     System.exit(0);
                     break;
             }
-
         }while(optionStartMenu!= 4);
     }
 
@@ -45,6 +45,10 @@ public class Menu {
         value = scanner.nextLine();
         BinarySearchTrees binarySearchTrees = new BinarySearchTrees();
         binarySearchTrees.insertar(key, value);
+    }
+
+    public void searchMenu(){
+
     }
 
 
