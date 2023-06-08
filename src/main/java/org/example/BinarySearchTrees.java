@@ -32,31 +32,37 @@ public class BinarySearchTrees {
     //Método de Inserción (Árbol Binario Búsqueda)
     //Agrega un nuevo elemento. Si no hay elementos se agrega como raíz
     //Si hay elementos, evalúa la llave de ingreso, si es mayor lo ingresa a la derecha, si es menor a la izquierda
-    public void insert(int key, Object firstValue, Object  secondValue, Object thirdValue) {
-        Nodo newNodo = new Nodo(key);  //Se crea un nuevo nodo con su llave y
-        newNodo.firstValue = firstValue;
-        newNodo.secondValue = secondValue;
-        newNodo.thirdValue = thirdValue;
+    
+    
+public void insert(int key, Object firstValue, Object secondValue, Object thirdValue) {
+    Nodo newNodo = new Nodo(key);  // Se crea un nuevo nodo con su llave
+    newNodo.firstValue = firstValue;
+    newNodo.secondValue = secondValue;
+    newNodo.thirdValue = thirdValue;
 
-        if (root == null) {
-            root = newNodo;
-        } else {
-            Nodo temporalNodo = root;
-            while (temporalNodo != null) {
-                newNodo.father = temporalNodo;
+    if (root == null) {
+        root = newNodo;
+    } else {
+        Nodo temporalNodo = root;
+        while (temporalNodo != null) {
+            newNodo.father = temporalNodo;
 
-                if (newNodo.llave >= temporalNodo.llave) {
-                } else {
-                    temporalNodo = temporalNodo.left;
-                }
-            }
-            if (newNodo.llave < newNodo.father.llave) { //Si la llave del nuevo nodo es menor a la llave del padre
-                newNodo.father.left = newNodo; //coloque el nuevo elemento a la izquierda
+            if (newNodo.llave >= temporalNodo.llave) {
+                temporalNodo = temporalNodo.right;
             } else {
-                newNodo.father.right = newNodo; //Si la llave del nuevo nodo es mayor a la llave del padre
+                temporalNodo = temporalNodo.left;
             }
         }
+
+        if (newNodo.llave < newNodo.father.llave) { // Si la llave del nuevo nodo es menor a la llave del padre
+            newNodo.father.left = newNodo; // Coloca el nuevo elemento a la izquierda
+        } else {
+            newNodo.father.right = newNodo; // Si la llave del nuevo nodo es mayor a la llave del padre
+        }
     }
+}
+
+
 
     public boolean delete(int d) {
         //  boolean eliminado = false;

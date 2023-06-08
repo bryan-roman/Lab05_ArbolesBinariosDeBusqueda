@@ -51,7 +51,7 @@ public class Menu {
     }
 
     public void addMenu() {
-        System.out.println("Ingrese la llave: ");
+        System.out.println("Ingrese la llave(Solamente números): ");
         key = Integer.parseInt(scanner.nextLine());
         System.out.println("Ingrese el primer valor del nodo:");
         firstValue = scanner.nextLine();
