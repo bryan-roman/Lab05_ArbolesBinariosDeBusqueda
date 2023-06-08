@@ -6,7 +6,10 @@ public class Menu {
 
     Scanner scanner = new Scanner(System.in);
     int key;
-    Object value;
+    Object firstValue;
+    Object secondValue;
+    Object thirdValue;
+
     BinarySearchTrees tree;
     boolean salida = false;
 
@@ -50,19 +53,21 @@ public class Menu {
     public void addMenu() {
         System.out.println("Ingrese la llave: ");
         key = Integer.parseInt(scanner.nextLine());
-        System.out.println("Ingrese el valor del nodo:");
-        value = scanner.nextLine();
-        tree.insertar(key, value);
+        System.out.println("Ingrese el primer valor del nodo:");
+        firstValue = scanner.nextLine();
+        System.out.println("Ingrese el segundo valor:  ");
+        secondValue = scanner.nextLine();
+        System.out.println("Ingrese el tercer valor");
+        thirdValue = scanner.nextLine();
+        tree.insert(key, firstValue, secondValue, thirdValue);
     }
 
     public void salir() {
         System.out.println("1 para salir, 2 para cancelar: ");
         key = Integer.parseInt(scanner.nextLine());
-        boolean resultado = false;
         if (key == 1) {
             salida = true;//
         }
-
     }
 
     public void searchMenu() {
