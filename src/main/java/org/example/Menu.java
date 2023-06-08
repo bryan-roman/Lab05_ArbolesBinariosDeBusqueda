@@ -7,12 +7,17 @@ public class Menu {
     Scanner scanner = new Scanner(System.in);
     int key;
     Object value;
-    BinarySearchTrees tree = new BinarySearchTrees();
+    BinarySearchTrees tree;
     boolean salida = false;
+
+    public Menu(BinarySearchTrees tree) {
+        this.tree = tree;
+    }
 
     public void startMenu() {
         while (!salida) {
-            System.out.println("Lb05-Arboles Binarios de Búsqueda \n");
+            System.out.println("");
+            System.out.print("Lb05-Arboles Binarios de Búsqueda \n");
             System.out.print("1- Inserción \n"
                     + "2- Borrado \n"
                     + "3- Búsqueda \n"
@@ -26,7 +31,8 @@ public class Menu {
 
                     break;
                 case 2:
-                    //delete
+                    deleteMenu();
+
                     break;
                 case 3:
                     searchMenu();
@@ -78,7 +84,15 @@ public class Menu {
             }
         }
     }
-    
-   
+
+    public void deleteMenu() {
+        System.out.print("Digite la llave que desea eliminar: ");
+        key = Integer.parseInt(scanner.nextLine());
+        if (tree.delete(key)) {
+            System.out.println("Nodo eliminado.");
+        } else {
+            System.out.println("El nodo no existe.");
+        }
+    }
 
 }

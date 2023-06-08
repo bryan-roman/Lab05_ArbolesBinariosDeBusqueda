@@ -28,15 +28,14 @@ public class BinarySearchTrees {
     public void inorderTreewalk(Nodo busqueda) {
         if (busqueda != null) {
             inorderTreewalk(busqueda.left);
-            System.out.println(busqueda.llave); //Regresal al medio o nodo actual
+            System.out.print(busqueda.llave+ ", "); //Regresal al medio o nodo actual
             inorderTreewalk(busqueda.right);
-
         }
     }
 
     public void preorderTreewalk(Nodo busqueda) {
         if (busqueda != null) {
-            System.out.println(busqueda.llave); //Regresal al medio o nodo actual
+            System.out.print(busqueda.llave+ ", "); //Regresal al medio o nodo actual
             preorderTreewalk(busqueda.left);
             preorderTreewalk(busqueda.right);
 
@@ -47,13 +46,13 @@ public class BinarySearchTrees {
         if (busqueda != null) {
             postorderTreewalk(busqueda.left);
             postorderTreewalk(busqueda.right);
-            System.out.println(busqueda.llave); //Regresal al medio o nodo actual
+            System.out.print(busqueda.llave + ", "); //Regresal al medio o nodo actual
 
         }
     }
 
     public boolean delete(int d) {
-        boolean eliminado = false;
+      //  boolean eliminado = false;
         Nodo auxiliar = root;
         Nodo padre = root;
         boolean esIzq = true;
@@ -62,40 +61,72 @@ public class BinarySearchTrees {
             padre = auxiliar;
 
             if (d < auxiliar.llave) {
-                esIzq=true;
-                auxiliar=auxiliar.left;
+                esIzq = true;
+                auxiliar = auxiliar.left;
             } else {
-                esIzq=false;
+                esIzq = false;
                 auxiliar = auxiliar.right;
             }
-            if (auxiliar==null) {
-                eliminado=false;
+            if (auxiliar == null) {
+                return false;
             }
         } //Fin while
-        
-        if (auxiliar.left ==null && auxiliar.right==null) {
-            if (auxiliar==root) {
-                root=null;
-            }else if (esIzq) {
-                padre.left=null;
-            } else{
-               padre.right=null; 
-            }
-            
-        }else if (auxiliar.right==null) {
-             if (auxiliar==root) {
-                root=auxiliar.left;
-            }else if (esIzq) {
-                padre.left=auxiliar.left;
-            } else{
-               padre.right=null; 
-            }
-        }
-        
-        
-        
 
-        return eliminado;
+        if (auxiliar.left == null && auxiliar.right == null) {
+            if (auxiliar == root) {
+                root = null;
+            } else if (esIzq) {
+                padre.left = null;
+            } else {
+                padre.right = null;
+            }
+
+        } else if (auxiliar.right == null) {
+            if (auxiliar == root) {
+                root = auxiliar.left;
+            } else if (esIzq) {
+                padre.left = auxiliar.left;
+            } else {
+                padre.right = auxiliar.left;
+            }
+        } else if (auxiliar.left == null) {
+            if (auxiliar == root) {
+                root = auxiliar.right;
+            } else if (esIzq) {
+                padre.left = auxiliar.right;
+            } else {
+                padre.right = auxiliar.left;
+            }
+        } else {
+            Nodo reemplazo = obtenerReemplazo(auxiliar);
+            if (auxiliar == root) {
+                root = reemplazo;
+            } else if (esIzq) {
+                padre.left = reemplazo;
+
+            } else {
+                padre.right = reemplazo;
+            }
+            reemplazo.left=auxiliar.left;
+        }
+        return true;
+    }
+    
+    public Nodo obtenerReemplazo(Nodo nodoReemp){
+        Nodo reempPadre= nodoReemp;
+        Nodo reemplazo=nodoReemp;
+        Nodo auxiliar= nodoReemp.right;
+        
+        while(auxiliar!=null){
+            reempPadre=reemplazo;
+            reemplazo=auxiliar;
+            auxiliar = auxiliar.left;
+        }
+        if (reemplazo!=nodoReemp.right) {
+            reempPadre.left=reemplazo.right;
+            reemplazo.right=nodoReemp.right;
+        }
+        return reemplazo;
     }
 
     public void insertar(int key, Object value) {

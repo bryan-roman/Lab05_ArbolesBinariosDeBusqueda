@@ -12,13 +12,13 @@ public class Main {
         tree.insertar(8, null);
         tree.insertar(6, null);
         tree.insertar(10, null);
-        //tree.inorderTreewalk(tree.root);
-       //  tree.preorderTreewalk(tree.root);
-        tree.postorderTreewalk(tree.root);
+//        //tree.inorderTreewalk(tree.root);
+//       //  tree.preorderTreewalk(tree.root);
+//        tree.postorderTreewalk(tree.root);
 
-//        Menu menu = new Menu();
-//
-//        menu.startMenu();
+        Menu menu = new Menu(tree);
+
+        menu.startMenu();
 
     }
 }
