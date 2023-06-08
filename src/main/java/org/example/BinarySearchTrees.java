@@ -33,7 +33,6 @@ public class BinarySearchTrees {
     //Agrega un nuevo elemento. Si no hay elementos se agrega como raíz
     //Si hay elementos, evalúa la llave de ingreso, si es mayor lo ingresa a la derecha, si es menor a la izquierda
     
-    
 public void insert(int key, Object firstValue, Object secondValue, Object thirdValue) {
     Nodo newNodo = new Nodo(key);  // Se crea un nuevo nodo con su llave
     newNodo.firstValue = firstValue;
@@ -46,7 +45,6 @@ public void insert(int key, Object firstValue, Object secondValue, Object thirdV
         Nodo temporalNodo = root;
         while (temporalNodo != null) {
             newNodo.father = temporalNodo;
-
             if (newNodo.llave >= temporalNodo.llave) {
                 temporalNodo = temporalNodo.right;
             } else {
@@ -62,76 +60,89 @@ public void insert(int key, Object firstValue, Object secondValue, Object thirdV
     }
 }
 
-
-
-    public boolean delete(int d) {
-        //  boolean eliminado = false;
+    public boolean delete(int keyDelete) {
+        //boolean eliminado = false;
         Nodo auxiliar = root;
         Nodo padre = root;
-        boolean esIzq = true;
+        boolean esIzq = true; //Si es true es izquierda, si es false por la derecha
 
-        while (auxiliar.llave != d) {
+        while (auxiliar.llave != keyDelete) {
             padre = auxiliar;
 
-            if (d < auxiliar.llave) {
+            if (keyDelete < auxiliar.llave) {
                 esIzq = true;
                 auxiliar = auxiliar.left;
             } else {
-                esIzq = false;
+                esIzq = false; //Se mueve al lado derecho
                 auxiliar = auxiliar.right;
             }
-            if (auxiliar == null) {
+            if (auxiliar == null) { //Llegó a la última posición, nunca lo encontró.
                 return false;
             }
         } //Fin while
 
+        //Se identifica que el nodo es hoja porque no tiene mas elementos abajo.
         if (auxiliar.left == null && auxiliar.right == null) {
             if (auxiliar == root) {
-                root = null;
+                root = null; //se elimina la raíz
             } else if (esIzq) {
                 padre.left = null;
             } else {
                 padre.right = null;
             }
 
-        } else if (auxiliar.right == null) {
+
+        } else if (auxiliar.right == null) { //Eliminar hijo derecho
             if (auxiliar == root) {
-                root = auxiliar.left;
+                root = auxiliar.left; //La raiz apunta a la izquierda
             } else if (esIzq) {
-                padre.left = auxiliar.left;
+                padre.left = auxiliar.left; // Ambas direcciones del padre son a la izquierda
             } else {
                 padre.right = auxiliar.left;
             }
-        } else if (auxiliar.left == null) {
+
+        } else if (auxiliar.left == null) { //Eliminar hijo izquierdo
             if (auxiliar == root) {
-                root = auxiliar.right;
+                root = auxiliar.right; //la raiz apunta a la derecha
             } else if (esIzq) {
                 padre.left = auxiliar.right;
             } else {
                 padre.right = auxiliar.left;
             }
         } else {
-            Nodo reemplazo = obtenerReemplazo(auxiliar);
+
+            Nodo reemplazo = obtenerReemplazo(auxiliar); //El nodo que va a remplazar el nodo a eliminar
             if (auxiliar == root) {
                 root = reemplazo;
             } else if (esIzq) {
-                padre.left = reemplazo;
+                padre.left = reemplazo; //
 
             } else {
-                padre.right = reemplazo;
+                padre.right = reemplazo; //
             }
-            reemplazo.left=auxiliar.left;
+            reemplazo.left=auxiliar.left; //
         }
         return true;
     }
 
-    public void inorderTreewalk(Nodo busqueda) {
-        if (busqueda != null) {
-            inorderTreewalk(busqueda.left);
-            System.out.print(busqueda.llave+ ", "); //Regresal al medio o nodo actual
-            inorderTreewalk(busqueda.right);
+    //Método se encarga de devolver el nodo que toma la posición del que eliminamos
+    public Nodo obtenerReemplazo(Nodo nodoReemplazo){
+        Nodo remplazoPadre= nodoReemplazo;
+        Nodo reemplazo =nodoReemplazo;
+        Nodo auxiliar= nodoReemplazo.right;
+
+        while(auxiliar!=null){
+            remplazoPadre=reemplazo;
+            reemplazo=auxiliar;
+            auxiliar = auxiliar.left;
         }
+        if (reemplazo!=nodoReemplazo.right) {
+            remplazoPadre.left=reemplazo.right;
+            reemplazo.right=nodoReemplazo.right;
+        }
+        return reemplazo;
     }
+
 
     public void preorderTreewalk(Nodo busqueda) {
         if (busqueda != null) {
@@ -139,6 +150,13 @@ public void insert(int key, Object firstValue, Object secondValue, Object thirdV
             preorderTreewalk(busqueda.left);
             preorderTreewalk(busqueda.right);
 
+        }
+    }
+    public void inorderTreewalk(Nodo busqueda) {
+        if (busqueda != null) {
+            inorderTreewalk(busqueda.left);
+            System.out.print(busqueda.llave+ ", "); //Regresal al medio o nodo actual
+            inorderTreewalk(busqueda.right);
         }
     }
 
@@ -150,23 +168,4 @@ public void insert(int key, Object firstValue, Object secondValue, Object thirdV
 
         }
     }
-    
-    public Nodo obtenerReemplazo(Nodo nodoReemp){
-        Nodo reempPadre= nodoReemp;
-        Nodo reemplazo=nodoReemp;
-        Nodo auxiliar= nodoReemp.right;
-        
-        while(auxiliar!=null){
-            reempPadre=reemplazo;
-            reemplazo=auxiliar;
-            auxiliar = auxiliar.left;
-        }
-        if (reemplazo!=nodoReemp.right) {
-            reempPadre.left=reemplazo.right;
-            reemplazo.right=nodoReemp.right;
-        }
-        return reemplazo;
-    }
-
-
 }
