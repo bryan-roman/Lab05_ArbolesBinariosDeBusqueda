@@ -7,47 +7,46 @@ public class Menu {
     Scanner scanner = new Scanner(System.in);
     int key;
     Object value;
-    BinarySearchTrees binarySearchTrees;
+    BinarySearchTrees tree = new BinarySearchTrees();
     boolean salida = false;
 
     public void startMenu() {
         while (!salida) {
-            System.out.println("Lb05-Arboles Binarios de Búsqueda");
-            System.out.println("Elija la opción: \n"
-                    + "1- Inserción \n"
+            System.out.println("Lb05-Arboles Binarios de Búsqueda \n");
+            System.out.print("1- Inserción \n"
                     + "2- Borrado \n"
                     + "3- Búsqueda \n"
-                    + "4- Salir");
+                    + "4- Salir \n"
+                    + "Elija la opción: ");
 
             int optionStartMenu = Integer.parseInt(scanner.nextLine());
-                switch (optionStartMenu) {
-                    case 1:
-                        addMenu();
+            switch (optionStartMenu) {
+                case 1:
+                    addMenu();
 
-                        break;
-                    case 2:
-                        //deleteMenu
-                        break;
-                    case 3:
-                        //searchMenu
-                        break;
-                    case 4:
-                        salir();
-                        break;
-                }
+                    break;
+                case 2:
+                    //delete
+                    break;
+                case 3:
+                    searchMenu();
 
-           
-        }        
+                    break;
+                case 4:
+                    salir();
+                    break;
+            }
 
-}
+        }
+
+    }
 
     public void addMenu() {
         System.out.println("Ingrese la llave: ");
         key = Integer.parseInt(scanner.nextLine());
         System.out.println("Ingrese el valor del nodo:");
         value = scanner.nextLine();
-        BinarySearchTrees binarySearchTrees = new BinarySearchTrees();
-        binarySearchTrees.insertar(key, value);
+        tree.insertar(key, value);
     }
 
     public void salir() {
@@ -55,9 +54,31 @@ public class Menu {
         key = Integer.parseInt(scanner.nextLine());
         boolean resultado = false;
         if (key == 1) {
-           salida=true;//
+            salida = true;//
         }
 
     }
+
+    public void searchMenu() {
+        System.out.print("1- Preorden \n"
+                + "2- Enorden \n"
+                + "3- Postorden \n"
+                + "Seleccione el metodo de recorrido: ");
+        key = Integer.parseInt(scanner.nextLine());
+
+        if (key == 1) {
+            tree.preorderTreewalk(tree.root);
+        } else {
+            if (key == 2) {
+                tree.inorderTreewalk(tree.root);
+            } else {
+                if (key == 3) {
+                    tree.postorderTreewalk(tree.root);
+                }
+            }
+        }
+    }
+    
+   
 
 }

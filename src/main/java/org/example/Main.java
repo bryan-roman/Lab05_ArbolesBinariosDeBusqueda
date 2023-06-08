@@ -1,20 +1,24 @@
 package org.example;
 
 public class Main {
-    public static void main(String[] args) {
-        Menu menu = new Menu();
-        menu.startMenu();
 
-//        BinarySearchTrees binarySearchTrees = new BinarySearchTrees();
-//        binarySearchTrees.insertar(5, null);
-//        binarySearchTrees.insertar(2, null);
-//        binarySearchTrees.insertar(1, null);
-//        binarySearchTrees.insertar(3, null);
-//        binarySearchTrees.insertar(8, null);
-//        binarySearchTrees.insertar(6, null);
-//        binarySearchTrees.insertar(10, null);
+    public static void main(String[] args) {
+
+        BinarySearchTrees tree = new BinarySearchTrees();
+        tree.insertar(4, null);
+        tree.insertar(12, null);
+        tree.insertar(1, null);
+        tree.insertar(3, null);
+        tree.insertar(8, null);
+        tree.insertar(6, null);
+        tree.insertar(10, null);
+        //tree.inorderTreewalk(tree.root);
+       //  tree.preorderTreewalk(tree.root);
+        tree.postorderTreewalk(tree.root);
+
+//        Menu menu = new Menu();
 //
-//        binarySearchTrees.inorderTreewalk(binarySearchTrees.root);
+//        menu.startMenu();
 
     }
 }
